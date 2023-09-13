@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lagoserv-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lagoserv-server
+  template:
+    metadata:
+      labels:
+        app: lagoserv-server
+    spec:
+      containers:
+      - name: lagoserv-container
+        image: asia-northeast3-docker.pkg.dev/lagoon-1/docker-registry/lagoserv:latest
+        ports:
+        - containerPort: 50051
