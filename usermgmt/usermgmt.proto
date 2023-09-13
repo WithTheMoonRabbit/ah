@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package usermgmt;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/withthemoonrabbit/lagoserv";
+
+service UserManagement {
+  rpc CreateNewUser (NewUser) returns (User) {}
+  rpc GetUsers (GetUsersParams) returns (UsersList) {}
+}
+
+message NewUser {
+  string nickname = 1; // 사용자 이름
+  string email = 2;    // 이메일 주소
+  string pwhash = 3; // 비밀번호 해시
+}
+
+message User {
+  int32 user_id = 1;    // 사용자 ID
+  string nickname = 2;  // 사용자 이름
+  string email = 3;     // 이메일 주소
+  string pwhash = 4; // 비밀번호 해시
+  google.protobuf.Timestamp created_at = 5; // 생성 일자
+}
+
+message GetUsersParams {
+
+}
+
+message UsersList {
+  repeated User users = 1; 
+}
